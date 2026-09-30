@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+FitBuddy – Generate Your Plan
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            AI FITNESS PLANNER
+        </p>
+
+
+        <h1>
+
+            Build a routine that fits
+
+            <span>
+                your goal.
+            </span>
+
+        </h1>
+
+
+        <p class="lead">
+
+            Tell FitBuddy a few basics and get
+            a structured 7-day workout plan plus
+            a nutrition or recovery tip.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+{% if error %}
+
+<div class="alert error">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+
+<section class="card form-card">
+
+
+    <form action="/generate-workout" method="post">
+
+
+        <div class="grid two">
+
+
+            <label>
+
+                Name
+
+                <input type="text" name="name" required minlength="2" placeholder="Your name">
+
+            </label>
+
+
+            <label>
+
+                User ID
+
+                <input type="text" name="user_id" required pattern="[A-Za-z0-9_-]+" placeholder="USER001">
+
+            </label>
+
+
+            <label>
+
+                Age
+
+                <input type="number" name="age" min="13" max="100" required placeholder="20">
+
+            </label>
+
+
+            <label>
+
+                Weight (kg)
+
+                <input type="number" name="weight" min="20" max="500" step="0.1" required placeholder="55">
+
+            </label>
+
+
+            <label>
+
+                Fitness Goal
+
+                <select name="goal" required>
+
+                    <option value="weight loss">
+                        Weight Loss
+                    </option>
+
+                    <option value="muscle gain">
+                        Muscle Gain
+                    </option>
+
+                    <option value="general wellness">
+                        General Wellness
+                    </option>
+
+                    <option value="flexibility">
+                        Flexibility
+                    </option>
+
+                    <option value="endurance">
+                        Endurance
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label>
+
+                Workout Intensity
+
+                <select name="intensity" required>
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                    <option value="medium" selected>
+                        Medium
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                </select>
+
+            </label>
+
+
+        </div>
+
+
+        <button class="btn primary" type="submit">
+
+            Generate 7-Day Plan →
+
+        </button>
+
+
+    </form>
+
+
+</section>
+
+
+<div class="feature-grid">
+
+
+    <div>
+
+        <b>
+            7-Day Structure
+        </b>
+
+        <p>
+            Warm-up, main work,
+            recovery and rest.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <b>
+            AI Feedback Loop
+        </b>
+
+        <p>
+            Refine your plan using
+            natural-language feedback.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <b>
+            Saved History
+        </b>
+
+        <p>
+            Plans are stored in
+            a local SQLite database.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

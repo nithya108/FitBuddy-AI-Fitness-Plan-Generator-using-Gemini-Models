@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+FitBuddy – Your Plan
+
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if message %}
+
+<div class="alert success">
+
+    {{ message }}
+
+</div>
+
+{% endif %}
+
+
+{% if error %}
+
+<div class="alert error">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+
+
+<section class="profile card">
+
+
+    <div>
+
+        <p class="eyebrow">
+            PERSONALIZED PLAN
+        </p>
+
+
+        <h1>
+            {{ data.user.name }}
+        </h1>
+
+    </div>
+
+
+    <div class="chips">
+
+        <span>
+            {{ data.user.goal }}
+        </span>
+
+        <span>
+            {{ data.user.intensity }} intensity
+        </span>
+
+        <span>
+            {{ data.user.weight }} kg
+        </span>
+
+        <span>
+            Age {{ data.user.age }}
+        </span>
+
+    </div>
+
+
+</section>
+
+
+<div class="result-grid">
+
+
+    <section class="card plan">
+
+
+        <div class="section-head">
+
+
+            <h2>
+
+                {% if data.updated_plan %}
+
+                Updated Workout Plan
+
+                {% else %}
+
+                Your 7-Day Workout Plan
+
+                {% endif %}
+
+            </h2>
+
+
+            <span class="badge">
+                AI Generated
+            </span>
+
+
+        </div>
+
+
+        <pre>
+{{ data.updated_plan or data.original_plan }}
+        </pre>
+
+
+    </section>
+
+
+    <aside class="side">
+
+
+        <section class="card tip">
+
+            <p class="eyebrow">
+                NUTRITION / RECOVERY
+            </p>
+
+
+            <h2>
+                One Useful Tip
+            </h2>
+
+
+            <p>
+                {{ data.nutrition_tip }}
+            </p>
+
+        </section>
+
+
+        <section class="card feedback">
+
+
+            <p class="eyebrow">
+                REFINE YOUR PLAN
+            </p>
+
+
+            <h2>
+                What should change?
+            </h2>
+
+
+            <form action="/submit-feedback" method="post">
+
+
+                <input type="hidden" name="user_id" value="{{ data.user.user_id }}">
+
+
+                <textarea name="feedback" required minlength="5" maxlength="2000"
+                    placeholder="Example: Add more cardio and make Day 6 easier."></textarea>
+
+
+                <button class="btn primary" type="submit">
+
+                    Update with AI →
+
+                </button>
+
+
+            </form>
+
+
+        </section>
+
+
+        <a class="btn secondary" href="/">
+
+            Create Another Plan
+
+        </a>
+
+
+    </aside>
+
+
+</div>
+
+
+{% endblock %}
